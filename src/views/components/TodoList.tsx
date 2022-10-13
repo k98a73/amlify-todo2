@@ -7,22 +7,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { useAppSelector } from "../../stores/hooks";
+import { selectTodoList } from "../../stores/slices/todo/todoSlice";
 import TodoItem from "./TodoItem";
 
 const TodoList: React.VFC = () => {
-  const TodoList = [
-    { id: "aaa", content: "aaa", idDone: true },
-    { id: "bbb", content: "bbb", idDone: false },
-    { id: "ccc", content: "ccc", idDone: true },
-    { id: "ddd", content: "ddd", idDone: false },
-    { id: "eee", content: "eee", idDone: true },
-    { id: "fff", content: "fff", idDone: false },
-    { id: "ggg", content: "ggg", idDone: true },
-    { id: "hhh", content: "hhh", idDone: false },
-    { id: "iii", content: "iii", idDone: true },
-    { id: "jjj", content: "jjj", idDone: false },
-  ];
-
+  const TodoList = useAppSelector(selectTodoList);
   return (
     <Flex flexDir="column" align="center">
       <Center mb={8}>
@@ -47,9 +37,10 @@ const TodoList: React.VFC = () => {
           TodoList.map((item) => {
             return (
               <TodoItem
+                key={item.id}
                 id={item.id}
                 content={item.content}
-                isDone={item.idDone}
+                isDone={item.isDone}
               />
             );
           })

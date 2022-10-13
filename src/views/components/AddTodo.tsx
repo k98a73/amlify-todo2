@@ -7,8 +7,11 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useAppDispatch } from "../../stores/hooks";
+import { createTodo } from "../../stores/slices/todo/todoSlice";
 
 const AddTodo: React.VFC = () => {
+  const dispatch = useAppDispatch();
   const {
     handleSubmit,
     register,
@@ -17,7 +20,7 @@ const AddTodo: React.VFC = () => {
   } = useForm();
   const onSubmit = (data: { content: string }) => {
     const { content } = data;
-    console.log({ content });
+    dispatch(createTodo(content));
     reset();
   };
 
